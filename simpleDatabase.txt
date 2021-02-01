@@ -1,0 +1,80 @@
+CREATE TABLE `student`( Id int, Name varchar(64), Address varchar(64), Status varchar(64), PRIMARY KEY (Id) )
+
+CREATE TABLE `PROFESSOR`( Id INT, Name VARCHAR(64), DeptId varchar(64) )
+
+CREATE TABLE `COURSE`( DeptId varchar(64), CrsCode varchar(7), CrsName varchar(64), Descr varchar(150) )
+
+CREATE TABLE `TRANSCRIPT`( StudId int, CrsCode varchar(7), Semester varchar(64), Grade varchar(2) )
+
+CREATE TABLE `TEACHING`( ProfId int, CrsCode varchar(64), Semester varchar(64) )
+
+
+
+
+CREATE TABLE `student`( Id int, Name varchar(64), Address varchar(64), Status varchar(64), PRIMARY KEY (Id) )
+[Edit inline] [ Edit ] [ Create PHP code ]
+ MySQL returned an empty result set (i.e. zero rows). (Query took 0.0627 seconds.)
+CREATE TABLE `PROFESSOR`( Id int, Name VARCHAR(64), DeptId varchar(64),PRIMARY KEY (Id) )
+[Edit inline] [ Edit ] [ Create PHP code ]
+ MySQL returned an empty result set (i.e. zero rows). (Query took 0.0636 seconds.)
+CREATE TABLE `COURSE`( DeptId varchar(64), CrsCode varchar(7), CrsName varchar(64), Descr varchar(150), PRIMARY KEY (CrsCode), UNIQUE KEY DepartmentKey (DeptId, CrsName) )
+[Edit inline] [ Edit ] [ Create PHP code ]
+ MySQL returned an empty result set (i.e. zero rows). (Query took 0.0735 seconds.)
+CREATE TABLE `TEACHING`( ProfId int, CrsCode varchar(64), Semester varchar(64), PRIMARY KEY (CrsCode, Semester), FOREIGN KEY (ProfId) REFERENCES Professor(Id) )
+[Edit inline] [ Edit ] [ Create PHP code ]
+ MySQL returned an empty result set (i.e. zero rows). (Query took 0.0717 seconds.)
+CREATE TABLE `TRANSCRIPT`( StudId int, CrsCode varchar(7), Semester varchar(64), Grade varchar(2), PRIMARY KEY (studId, CrsCode, Semester), FOREIGN KEY (StudId) REFERENCES Student(Id), FOREIGN KEY (CrsCode) REFERENCES Course(CrsCode), FOREIGN KEY (CrsCode, Semester) REFERENCES Teaching(CrsCode, Semester))
+
+
+
+
+
+
+
+
+
+CREATE TABLE `student`( Id int, Name varchar(64),
+                       Address varchar(64),
+                       Status varchar(64),
+                       PRIMARY KEY (Id) 
+                      
+);
+
+
+
+CREATE TABLE `PROFESSOR`( Id int,
+                         Name VARCHAR(64),
+                         DeptId varchar(64),
+                         PRIMARY KEY (Id) 
+                        
+);
+
+CREATE TABLE `COURSE`( DeptId varchar(64),
+                      CrsCode varchar(7),
+                      CrsName varchar(64), 
+                      Descr varchar(150), 
+                      PRIMARY KEY (CrsCode), 
+                      UNIQUE KEY DepartmentKey (DeptId, CrsName), 
+                      CHECK (VALUE > 0 & Value <= 100)
+);
+
+CREATE TABLE `TEACHING`( ProfId int, 
+                        CrsCode varchar(64), 
+                        Semester varchar(64),
+                        PRIMARY KEY (CrsCode,Semester),
+                        FOREIGN KEY (ProfId) REFERENCES Professor(Id)
+                       
+);
+
+CREATE TABLE `TRANSCRIPT`( StudId int, 
+                          CrsCode varchar(7),
+                          Semester varchar(64), 
+                          Grade varchar(2),
+                          PRIMARY KEY (studId, CrsCode,Semester), 
+                          FOREIGN KEY (StudId) REFERENCES Student(Id),
+                          FOREIGN KEY (CrsCode) REFERENCES Course(CrsCode), 
+                          FOREIGN KEY (CrsCode, Semester) REFERENCES Teaching(CrsCode, Semester)
+                         
+                         
+                         
+)
